@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../plugins/elementui/index.css">
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+<body>
+<div id="app1">
+    <el-form ref="form" :model="formScore" :disabled="true" label-width="150px" size="small" >
+        <el-form-item label="姓名" label-width="100px">
+            <el-input v-model="formScore.name" ></el-input>
+        </el-form-item>
+        <el-form-item label="学号" label-width="100px">
+            <el-input v-model="formScore.sno" ></el-input>
+        </el-form-item>
+        <el-form-item label="年龄" label-width="100px">
+            <el-input v-model="formScore.age" ></el-input>
+        </el-form-item>
+        <el-form-item label="性别" label-width="100px">
+            <el-input v-model="formScore.sex" ></el-input>
+        </el-form-item>
+        <el-form-item label="成绩" label-width="100px">
+            <el-input v-model="formScore.grade"></el-input>
+        </el-form-item>
+
+    </el-form>
+
+
+</div>
+
+</body>
+
+<script src="../js/vue.js"></script>
+<script src="../plugins/elementui/index.js"></script>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+
+<script>
+    const vue = new Vue({
+
+        el: '#app1',
+
+        data:{
+            formScore:{},
+        },
+
+        //挂载函数，VUE对象初始化完成后自动执行
+        mounted() {
+            this.selectScore();
+        },
+
+        methods: {
+            selectScore() {
+                axios.get("http://localhost:8080/StudentManagement_war/users").then((res) => {
+                    console.log(res.data.data)
+                    this.formScore = res.data.data;
+
+                });
+            },
+        }
+    });
+</script>
+</html>
